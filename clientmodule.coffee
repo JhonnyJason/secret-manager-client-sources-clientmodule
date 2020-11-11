@@ -17,6 +17,10 @@ class Client
     constructor: (@secretKeyHex, @publicKeyHex, @serverURL) ->
         @ready = addNodeId(this)
 
+    updateServerURL: (serverURL) ->
+        @serverURL = serverURL
+        @ready = addNodeId(this)
+
     getSecretSpace: ->
         await @ready
         secret = await getSecretSpace(this)
@@ -203,7 +207,7 @@ deleteSharedSecret = (sharedToId, secretId, client) ->
 #endregion
 
 ############################################################
-clientbrowser.createClient = (secretKeyHex, publicKeyHex, serverURL) ->
+clientmodule.createClient = (secretKeyHex, publicKeyHex, serverURL) ->
     if !secretKeyHex
         secretKeyHex = tbut.bytesToHex(newSecretBytes())
         publicKeyHex = await noble.getPublicKey(secretKeyHex)
@@ -211,4 +215,4 @@ clientbrowser.createClient = (secretKeyHex, publicKeyHex, serverURL) ->
         publicKeyHex = await noble.getPublicKey(secretKeyHex)
     return new Client(secretKeyHex, publicKeyHex, serverURL)
 
-module.exports = clientbrowser
+module.exports = clientmodule
