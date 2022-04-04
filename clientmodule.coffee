@@ -2,7 +2,7 @@ clientmodule = {}
 
 ############################################################
 #region modules
-noble = require("noble-ed25519")
+noble = require("@noble/ed25519")
 
 tbut = require("./thingybyteutils")
 secUtl = require("./secretmanagercryptoutils")
